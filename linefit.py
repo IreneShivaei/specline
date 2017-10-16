@@ -282,11 +282,13 @@ def main(file,*arg):
 
     if sys.argv[2] == 'Ha': ha(header, spec, specerr, specwl)
     if sys.argv[2] == 'Hb': hb(header, spec, specerr, specwl)
-    if sys.argv[2] == 'O3': oiii(header, spec, specerr, specwl)
-    if sys.argv[2] == 'O2': oii(header, spec, specerr, specwl)
+    if sys.argv[2] == 'oiii': oiii(header, spec, specerr, specwl)
+    if sys.argv[2] == 'oii': oii(header, spec, specerr, specwl)
     if len(sys.argv) == 4:
         if sys.argv[3] == 'Ha': ha(header, spec, specerr, specwl)
         if sys.argv[3] == 'Hb': hb(header, spec, specerr, specwl)
+        if sys.argv[3] == 'oiii': oiii(header, spec, specerr, specwl)
+        if sys.argv[3] == 'oii': oii(header, spec, specerr, specwl)
 
 import sys
 file=sys.argv[1]

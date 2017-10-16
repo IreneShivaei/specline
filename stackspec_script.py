@@ -10,7 +10,6 @@ from astropy.cosmology import FlatLambdaCDM
 #you can also use pre-defined parameters, e.g.:
 #from astropy.cosmology import WMAP7
 import astropy.units as u
-import pdb
 #define the cosmology (if you import WMAP7, you don't need this line)
 cosmo = FlatLambdaCDM(H0=70 * u.km / u.s / u.Mpc, Om0=0.3) 
 
@@ -93,15 +92,11 @@ def main(specpath,tblpath,obj_ind,outfile,*normto):
     zarray=tbl['z_mosfire'][obj_ind]
     ha6565_lum=tbl['ha6565_lum'][obj_ind]
     hb4863_lum=tbl['hb4863_lum'][obj_ind]
-    luvcorr=tbl['luv_ebmv_smc'][obj_ind]
+    luvcorr=tbl['luv'][obj_ind]
     ha6565_abs_flux=tbl['ha6565_abs_flux'][obj_ind]
     hb4863_abs_flux=tbl['hb4863_abs_flux'][obj_ind]
     ha6565_lum_err=tbl['ha6565_lum_err'][obj_ind]
     hb4863_lum_err=tbl['hb4863_lum_err'][obj_ind]
-    ebmv=tbl['ebmv_smc'][obj_ind]
-    fesc=np.exp(-5.214* ebmv**0.312) #f_escape based on Reddy+2016b
-    fesc[np.isfinite(fesc) == False] = 0.
-    fesc[fesc == 1.] = .4 #to avoid unrealistically high xi_ion
     idliststr=[str(e) for e in idlist]
 
     specfile = specpath + masklist.strip()+'.*.'+idliststr+'.ell.1d.fits'
@@ -121,7 +116,6 @@ def main(specpath,tblpath,obj_ind,outfile,*normto):
     uvlumlist=np.zeros(speccount)
     ha6565_abs_fluxlist=np.zeros(speccount)
     hb4863_abs_fluxlist=np.zeros(speccount)
-    fesclist=np.zeros(speccount)
     specind=0
     for i,f in enumerate(specfile):
         filelisttemp=glob(f)
@@ -133,16 +127,14 @@ def main(specpath,tblpath,obj_ind,outfile,*normto):
             uvlumlist[specind] = luvcorr[i]
             ha6565_abs_fluxlist[specind] = ha6565_abs_flux[i]
             hb4863_abs_fluxlist[specind] = hb4863_abs_flux[i]
-            fesclist[specind] = fesc[i]
             specind += 1
     import sys
     if sys.argv[5] == 'Ha': norm = 1./halumlist ; normbalm = 1./ha6565_lum
     if sys.argv[5] == 'Hb': norm = 1./hblumlist ; normbalm = 1./hb4863_lum
     if sys.argv[5] == 'UV': norm = 1./uvlumlist ; normbalm = 1./luvcorr
-    if sys.argv[5] == 'UV_fesc': norm = (1.+fesclist)/uvlumlist ; normbalm = (1.+fesc)/luvcorr
     if sys.argv[5] == 'none': norm = np.ones(len(halumlist)) ; normbalm = np.ones(len(ha6565_lum))
-    if (sys.argv[5] != 'Ha') & (sys.argv[5] != 'Hb') & (sys.argv[5] != 'UV') & (sys.argv[5] != 'none') & (sys.argv[5] != 'UV_fesc'):
-        print('normto keyword should be set to one of these: "Ha","Hb","UV", "UV_fesc", or "none" ')
+    if (sys.argv[5] != 'Ha') & (sys.argv[5] != 'Hb') & (sys.argv[5] != 'UV') & (sys.argv[5] != 'none')):
+        print('normto keyword should be set to one of these: "Ha","Hb","UV", or "none" ')
 
 #make a grid of wavelength with the desired resolution
     wavemin = 3250
