@@ -2,7 +2,7 @@
 
 The python scripts presented here are to stack multiple spectra, make a composite spectrum, and fit optical emission lines with Gaussian profiles to calculate the line luminosities. 
 
-The details of the stacking method is discussed at *Shivaei et al. (2017, ApJ, in press)*.
+The details of the stacking method is discussed in *Shivaei et al. (2017, ApJ, in press)*.
 
 Contributions are very welcomed!
 
