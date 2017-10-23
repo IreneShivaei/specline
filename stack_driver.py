@@ -1,3 +1,5 @@
+from __future__ import print_function
+
 def driver(*args):
     '''
     the first argument is for the spectra stack normalization, and it can be one of these three options: 'Ha', 'Hb', 'UV', 'none'
