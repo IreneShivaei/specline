@@ -32,9 +32,9 @@ This code fits the H-alpha, H-beta, and [OIII]5007 lines with single Gaussian pr
 
 ## How to run the code
 
-* The code uses `python 3.6.1`
+* The code uses `python 3.6.1 (also compatible with 2.7.9)`
 
-* Required libraries: `numpy 1.12.1` and `astropy 1.3.2`. Other standard libraries include glob, time, argparse, multiprocessing, subprocess, sys, os.
+* Required libraries: `numpy 1.11.3` and `astropy 1.3.2`. Other standard libraries include glob, time, argparse, multiprocessing, subprocess, sys, os.
 
 The driver code is [stack_driver.py](#stack_driverpy). Before running this code you need to modify a few lines:
 

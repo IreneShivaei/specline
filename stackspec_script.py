@@ -133,7 +133,7 @@ def main(specpath,tblpath,obj_ind,outfile,*normto):
     if sys.argv[5] == 'Hb': norm = 1./hblumlist ; normbalm = 1./hb4863_lum
     if sys.argv[5] == 'UV': norm = 1./uvlumlist ; normbalm = 1./luvcorr
     if sys.argv[5] == 'none': norm = np.ones(len(halumlist)) ; normbalm = np.ones(len(ha6565_lum))
-    if (sys.argv[5] != 'Ha') & (sys.argv[5] != 'Hb') & (sys.argv[5] != 'UV') & (sys.argv[5] != 'none')):
+    if ((sys.argv[5] != 'Ha') & (sys.argv[5] != 'Hb') & (sys.argv[5] != 'UV') & (sys.argv[5] != 'none')):
         print('normto keyword should be set to one of these: "Ha","Hb","UV", or "none" ')
 
 #make a grid of wavelength with the desired resolution

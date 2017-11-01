@@ -1,3 +1,5 @@
+from __future__ import print_function
+
 def driver(*args):
     '''
     the first argument is for the spectra stack normalization, and it can be one of these three options: 'Ha', 'Hb', 'UV', 'none'
@@ -26,7 +28,7 @@ def driver(*args):
     #objects to stack
     tbl=fits.getdata(tblpath, ext=1)
     obj_ind=((tbl['z_mosfire'] < 2.) & (tbl['ha6565_lum'] != -999.))
-    print('Stacking ',tbl['o32'][obj_ind].size,' objs')
+    print('Stacking ',tbl['id'][obj_ind].size,' objs')
 
     obj_ind=obj_ind*1. #convert boolean to 0,1 array
     
